@@ -1,15 +1,26 @@
 ---
 driver:
-  name: vagrant
+  name: ec2
+  aws_ssh_key_id: ChefLab
+  region: us-west-1
+  availability_zone: c
+  subnet_id: subnet-9d7bfec5
+  instance_type: t2.micro
+  image_id: ami-65e0e305
+  security_group_ids: ["sg-16523c6f"]
+  retryable_tries: 120 
 
 provisioner:
   name: chef_zero
 
 verifier:
   name: inspec
+  
+  transport:
+  ssh_key: ~/.ssh/ChefLab.pem
+  username: centos
 
 platforms:
-  - name: ubuntu-16.04
   - name: centos-7.2
 
 suites:
